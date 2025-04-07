@@ -8,8 +8,33 @@
 import SwiftUI
 
 struct UserSearchView: View {
+    @State var test = ""
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationView {
+            VStack {
+                Text("Get started")
+                    .foregroundColor(.primary)
+                    .fontWeight(.bold)
+                    .font(.system(size: 16))
+                    .padding(.bottom)
+                Text("Type a GitHub username in the search bar below")
+                    .font(.system(size: 12))
+                    .foregroundColor(.secondary)
+                    .padding(.bottom)
+                HStack {
+                    TextField("Search", text: $test)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    Image(systemName: "magnifyingglass")
+                        .foregroundColor(.gray)
+                }
+                .padding()
+            }
+            .multilineTextAlignment(.center)
+            .frame(maxWidth: .infinity, alignment: .center)
+            Spacer()
+                .navigationTitle("GitHub Search")
+        }
     }
 }
 
