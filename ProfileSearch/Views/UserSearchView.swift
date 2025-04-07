@@ -8,32 +8,47 @@
 import SwiftUI
 
 struct UserSearchView: View {
-    @State var test = ""
+    @State private var searchText = ""
+    @State private var path = NavigationPath()
 
     var body: some View {
-        NavigationView {
+        NavigationStack(path: $path) {
             VStack {
                 Text("Get started")
                     .foregroundColor(.primary)
                     .fontWeight(.bold)
-                    .font(.system(size: 16))
+                    .font(.system(size: 24))
                     .padding(.bottom)
+
                 Text("Type a GitHub username in the search bar below")
-                    .font(.system(size: 12))
+                    .font(.system(size: 20))
                     .foregroundColor(.secondary)
                     .padding(.bottom)
+
                 HStack {
-                    TextField("Search", text: $test)
+                    TextField("Search", text: $searchText)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                    Image(systemName: "magnifyingglass")
-                        .foregroundColor(.gray)
+                        .autocorrectionDisabled(true)
+
+                    Button(action: {
+                        if !searchText.isEmpty {
+                            path.append(searchText)
+                            searchText = ""
+                        }
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                    }
                 }
                 .padding()
+
             }
             .multilineTextAlignment(.center)
             .frame(maxWidth: .infinity, alignment: .center)
-            Spacer()
-                .navigationTitle("GitHub Search")
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationDestination(for: String.self) { username in
+                UserDetailsView(username: username)
+            }
         }
     }
 }
