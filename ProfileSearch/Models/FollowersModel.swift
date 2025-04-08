@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - FollowersModel
 struct FollowersModel: Identifiable, Codable {
     var id: Int
     var login: String
@@ -15,6 +16,8 @@ struct FollowersModel: Identifiable, Codable {
     var bio: String?
 }
 
+// MARK: - Extension UserDetailsModel
+/* Save the user details to pass down to the Followers Model */
 extension UserDetailsModel {
     init(from follower: FollowersModel) {
         self.init(

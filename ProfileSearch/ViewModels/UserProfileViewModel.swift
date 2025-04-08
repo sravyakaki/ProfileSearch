@@ -7,10 +7,11 @@
 
 import Foundation
 
+// MARK: - UserProfileViewModel
 class UserProfileViewModel: ObservableObject {
     @Published var user: UserDetailsModel?
     @Published var error: String?
-
+    
     func fetchUserProfile(
         username: String, completion: @escaping (Bool) -> Void
     ) {

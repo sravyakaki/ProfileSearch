@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+// MARK: - FollowingView
 struct FollowingView: View {
     @ObservedObject var viewModel = FollowingViewModel()
     let user: UserDetailsModel
     @State private var selectedUser: UserDetailsModel? = nil
-
+    
     var body: some View {
         VStack {
             if let error = viewModel.error {
@@ -47,7 +48,7 @@ struct FollowingView: View {
             }
         }
     }
-
+    
     private func fetchUserDetails(for username: String) {
         NetworkManager.shared.fetchUserProfile(username: username) { result in
             DispatchQueue.main.async {

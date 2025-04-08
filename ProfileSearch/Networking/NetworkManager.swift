@@ -11,9 +11,9 @@ import Foundation
 class NetworkManager {
     static let shared = NetworkManager()
     private let baseURL = "https://api.github.com/users/"
-
+    
     private init() {}
-
+    
     func fetchUserProfile(
         username: String,
         completion: @escaping (Result<UserDetailsModel, NetworkError>) -> Void
@@ -21,7 +21,7 @@ class NetworkManager {
         let urlString = "\(baseURL)\(username)"
         NetworkConnector.shared.fetch(from: urlString, completion: completion)
     }
-
+    
     func fetchFollowers(
         for user: UserDetailsModel,
         completion: @escaping (Result<[FollowersModel], NetworkError>) -> Void
@@ -29,7 +29,7 @@ class NetworkManager {
         let urlString = "\(baseURL)\(user.login)/followers"
         NetworkConnector.shared.fetch(from: urlString, completion: completion)
     }
-
+    
     func fetchFollowing(
         for user: UserDetailsModel,
         completion: @escaping (Result<[FollowersModel], NetworkError>) -> Void

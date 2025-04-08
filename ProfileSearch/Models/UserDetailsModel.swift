@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: - UserDetailsModel
 struct UserDetailsModel: Identifiable, Decodable, Hashable {
     let avatar_url: String
     let id: Int

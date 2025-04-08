@@ -7,10 +7,11 @@
 
 import Foundation
 
+// MARK: - FollowingViewModel
 class FollowingViewModel: ObservableObject {
     @Published var following: [FollowersModel] = []
     @Published var error: String?
-
+    
     func fetchFollowing(for user: UserDetailsModel) {
         NetworkManager.shared.fetchFollowing(for: user) { result in
             DispatchQueue.main.async {

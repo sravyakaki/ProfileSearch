@@ -11,7 +11,7 @@ import SwiftUI
 struct ProfileSearchApp: App {
     var body: some Scene {
         WindowGroup {
-            UserSearchView()
+            UserSearchView() // Entry point to the app
         }
     }
 }

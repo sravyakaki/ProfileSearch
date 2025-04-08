@@ -7,9 +7,10 @@
 
 import SwiftUI
 
+// MARK: - UserDetailsView
 struct UserDetailsView: View {
     let user: UserDetailsModel
-
+    
     var body: some View {
         VStack {
             AsyncImage(url: URL(string: user.avatar_url)) { image in
@@ -23,15 +24,15 @@ struct UserDetailsView: View {
             Text("Username: \(user.login)")
                 .font(.headline)
                 .padding(.top)
-
+            
             Text("Name: \(user.name ?? "Name unavailable")")
                 .font(.headline)
                 .padding(.top)
-
+            
             Text("Description: \(user.bio ?? "Bio unavailable")")
                 .font(.subheadline)
                 .padding(.bottom)
-
+            
             VStack {
                 HStack {
                     Text("\(user.followers) followers")

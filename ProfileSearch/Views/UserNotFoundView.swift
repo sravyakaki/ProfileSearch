@@ -6,6 +6,7 @@
 //
 import SwiftUI
 
+// MARK: - UserNotFoundView
 struct UserNotFoundView: View {
     var body: some View {
         VStack(spacing: 15) {
@@ -14,12 +15,12 @@ struct UserNotFoundView: View {
                 .scaledToFit()
                 .frame(width: 150, height: 150)
                 .foregroundColor(.gray)
-
+            
             Text("User Not Found")
                 .font(.title)
                 .fontWeight(.bold)
                 .foregroundColor(.primary)
-
+            
             Text("Please try searching with a different username.")
                 .font(.body)
                 .multilineTextAlignment(.center)

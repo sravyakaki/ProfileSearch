@@ -7,10 +7,11 @@
 
 import Foundation
 
+// MARK: - FollowersViewModel
 class FollowersViewModel: ObservableObject {
     @Published var followers: [UserDetailsModel] = []
     @Published var error: String?
-
+    
     func fetchFollowers(for user: UserDetailsModel) {
         NetworkManager.shared.fetchFollowers(for: user) { result in
             DispatchQueue.main.async {
@@ -23,7 +24,7 @@ class FollowersViewModel: ObservableObject {
             }
         }
     }
-
+    
     private func loadFullUserProfiles(from basicFollowers: [FollowersModel]) {
         for follower in basicFollowers {
             NetworkManager.shared.fetchUserProfile(username: follower.login) {

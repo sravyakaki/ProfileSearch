@@ -18,9 +18,9 @@ enum NetworkError: Error {
 // MARK: - NetworkConnector
 class NetworkConnector {
     static let shared = NetworkConnector()
-
+    
     private init() {}
-
+    
     func fetch<T: Decodable>(
         from urlString: String,
         completion: @escaping (Result<T, NetworkError>) -> Void
@@ -29,18 +29,18 @@ class NetworkConnector {
             completion(.failure(.invalidURL))
             return
         }
-
+        
         URLSession.shared.dataTask(with: url) { data, response, error in
             if error != nil {
                 completion(.failure(.requestFailed))
                 return
             }
-
+            
             guard let data = data else {
                 completion(.failure(.noData))
                 return
             }
-
+            
             do {
                 let decodedObject = try JSONDecoder().decode(T.self, from: data)
                 completion(.success(decodedObject))

@@ -6,10 +6,11 @@
 //
 import SwiftUI
 
+// MARK: - FollowersView
 struct FollowersView: View {
     @ObservedObject var viewModel = FollowersViewModel()
     let user: UserDetailsModel
-
+    
     var body: some View {
         VStack {
             if let error = viewModel.error {
