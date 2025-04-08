@@ -10,6 +10,7 @@ import SwiftUI
 struct FollowingView: View {
     @ObservedObject var viewModel = FollowingViewModel()
     let user: UserDetailsModel
+    @State private var selectedUser: UserDetailsModel? = nil
 
     var body: some View {
         VStack {
@@ -19,9 +20,9 @@ struct FollowingView: View {
                     .padding()
             } else {
                 List(viewModel.following) { following in
-                    NavigationLink(
-                        destination: UserDetailsView(username: following.login)
-                    ) {
+                    Button(action: {
+                        fetchUserDetails(for: following.login)
+                    }) {
                         HStack {
                             AsyncImage(url: URL(string: following.avatar_url)) {
                                 image in
@@ -40,6 +41,22 @@ struct FollowingView: View {
                     viewModel.fetchFollowing(for: user)
                 }
                 .navigationTitle("\(user.login)'s Following")
+                .navigationDestination(item: $selectedUser) { user in
+                    UserDetailsView(user: user)
+                }
+            }
+        }
+    }
+
+    private func fetchUserDetails(for username: String) {
+        NetworkManager.shared.fetchUserProfile(username: username) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let userDetails):
+                    self.selectedUser = userDetails
+                case .failure(let error):
+                    viewModel.error = error.localizedDescription
+                }
             }
         }
     }

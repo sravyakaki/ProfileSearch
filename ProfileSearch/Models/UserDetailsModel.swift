@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct UserDetailsModel: Identifiable, Decodable {
+struct UserDetailsModel: Identifiable, Decodable, Hashable {
     let avatar_url: String
     let id: Int
     let name: String?

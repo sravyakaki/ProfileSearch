@@ -19,7 +19,7 @@ struct FollowersView: View {
             } else {
                 List(viewModel.followers) { follower in
                     NavigationLink(
-                        destination: UserDetailsView(username: follower.login)
+                        destination: UserDetailsView(user: follower)
                     ) {
                         HStack {
                             AsyncImage(url: URL(string: follower.avatar_url)) {

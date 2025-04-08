@@ -8,8 +8,29 @@ import SwiftUI
 
 struct UserNotFoundView: View {
     var body: some View {
-        Text("Not found - try searching using a different username")
-            .font(.title)
-            .foregroundColor(.red)
+        VStack(spacing: 15) {
+            Image(systemName: "person.crop.circle.badge.xmark")
+                .resizable()
+                .scaledToFit()
+                .frame(width: 150, height: 150)
+                .foregroundColor(.gray)
+
+            Text("User Not Found")
+                .font(.title)
+                .fontWeight(.bold)
+                .foregroundColor(.primary)
+
+            Text("Please try searching with a different username.")
+                .font(.body)
+                .multilineTextAlignment(.center)
+                .foregroundColor(.secondary)
+                .padding(.horizontal, 32)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(.systemBackground))
     }
+}
+
+#Preview {
+    UserNotFoundView()
 }

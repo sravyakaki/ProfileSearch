@@ -8,7 +8,7 @@
 import Foundation
 
 class FollowersViewModel: ObservableObject {
-    @Published var followers: [FollowersModel] = []
+    @Published var followers: [UserDetailsModel] = []
     @Published var error: String?
 
     func fetchFollowers(for user: UserDetailsModel) {
@@ -16,9 +16,25 @@ class FollowersViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let fetchedFollowers):
-                    self.followers = fetchedFollowers
+                    self.loadFullUserProfiles(from: fetchedFollowers)
                 case .failure(let error):
                     self.error = error.localizedDescription
+                }
+            }
+        }
+    }
+
+    private func loadFullUserProfiles(from basicFollowers: [FollowersModel]) {
+        for follower in basicFollowers {
+            NetworkManager.shared.fetchUserProfile(username: follower.login) {
+                result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let userDetails):
+                        self.followers.append(userDetails)
+                    case .failure(let error):
+                        self.error = error.localizedDescription
+                    }
                 }
             }
         }
